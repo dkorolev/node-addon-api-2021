@@ -9,6 +9,7 @@
         "<!@(node -p \"require('node-addon-api').include\")"
       ],
       'defines': [ 'NAPI_DISABLE_CPP_EXCEPTIONS' ],
+      "libraries": [ "../extension/build/extension.so" ]
     }
   ]
 }
