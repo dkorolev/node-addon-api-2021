@@ -19,7 +19,7 @@ The string that is output is coming from a C++ source file. This source is rebui
 
 1. Edit the C++ source file, `sed -i 's/happened/happened again/' native.cc`.
 2. Observe that just `./run.js` prints the old message.
-3. Confirm that, after `npm i`, `./run.js` prints the updated one.
+3. Confirm that, after `npm i`, `./run.js` prints the updated one, QED.
 
 ### Step 2: Using an External Dependency
 
@@ -44,5 +44,5 @@ The string that is output is coming from a C++ code, but its very contents is po
 2. Observe that just `./run.js` prints the old message.
 3. Observe that `npm i && ./run.js` prints the old message.
 4. Run `(cd extension && make)`, which would rebuild the `.so` that is picked up by `npm i`.
-5. At this point, `./run.js` would still print the old message, as `npm i` must be invoked to pick up the updated `.so`.
-6. Confirm that now, after `npm i`, `./run.js` would prints the updated message.
+5. At this point, before `npm i`, `./run.js` would still print the old message.
+6. Confirm that now, after `npm i`, `./run.js` prints the updated message, QED.
