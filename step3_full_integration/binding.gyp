@@ -4,6 +4,7 @@
       "target_name": "native",
       "cflags!": [ "-fno-exceptions" ],
       "cflags_cc!": [ "-fno-exceptions" ],
+      "cflags_cc": [ "-std=c++17" ],
       "sources": [ "native.cc" ],
       "include_dirs": [
         "<!@(node -p \"require('node-addon-api').include\")"

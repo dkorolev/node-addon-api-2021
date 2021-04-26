@@ -1,6 +1,11 @@
 #include "extension/extension_using_current.h"
 #include "wrapper.h"
 
+namespace see::plus::plus::seventeen
+{
+  inline constexpr std::string_view has{"arrived"};
+}
+
 Napi::Value DemoAsyncIntegration(const Napi::CallbackInfo& cbinfo) {
   NodeJSContext ctx(cbinfo);
 
