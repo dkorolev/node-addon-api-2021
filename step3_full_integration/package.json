@@ -1,7 +1,7 @@
 {
-  "name": "step2_external_dependency",
+  "name": "step3_full_integration",
   "version": "0.0.1",
-  "description": "The node.js + C++ example that links against an external library.",
+  "description": "The node.js + C++ example that uses async callbacks from an external library.",
   "main": "run.js",
   "private": true,
   "gypfile": true,

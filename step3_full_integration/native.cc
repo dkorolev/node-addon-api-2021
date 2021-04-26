@@ -1,19 +1,28 @@
-#include <napi.h>
+#include "extension/extension_using_current.h"
+#include "wrapper.h"
 
-#include <string>
+Napi::Value DemoAsyncIntegration(const Napi::CallbackInfo& cbinfo) {
+  NodeJSContext ctx(cbinfo);
 
-void PopulateResultFromExtension(std::string&);
+  int const port = cbinfo[0].As<Napi::Number>();
+  NodeJSFunction f_timer = ctx.ExtractJSFunction(cbinfo[1]);
+  NodeJSFunction f_route = ctx.ExtractJSFunction(cbinfo[2]);
 
-void Magic(const Napi::CallbackInfo& info) {
-  Napi::Env env = info.Env();
-  std::string result = "<unset>";
-  PopulateResultFromExtension(result);
-  info[0].As<Napi::Function>().Call(env.Global(), {Napi::String::New(env, result)});
+  ctx.RunAsync([port, f_timer, f_route]() {
+    ExternalService e(port, [&](const std::string& s) { f_route(s); });
+    for (int i = 1; i <= 10; ++i) {
+      f_timer(i);
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    }
+    e.WaitUntilDeleted();
+  });
+
+  return ctx.GetPromise();
 }
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
-  static_cast<void>(exports);
-  return Napi::Function::New(env, Magic);
+  exports["demoAsyncIntegration"] = Napi::Function::New(env, DemoAsyncIntegration);
+  return exports;
 }
 
-NODE_API_MODULE(lib, Init)
+NODE_API_MODULE(addon, Init)

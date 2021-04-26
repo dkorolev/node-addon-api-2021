@@ -1,10 +1,10 @@
 .PHONY: all clean
 
-all: build/extension.so
+all: build/extension_using_current.a
 
 clean:
 	rm -rf build
 
-build/extension.so: extension.cc
+build/extension_using_current.a: extension_using_current.cc extension_using_current.h
 	mkdir -p build
-	g++ -o build/extension.so -c $< -fPIC
+	g++ -std=c++17 -o $@ -c $< -fPIC
