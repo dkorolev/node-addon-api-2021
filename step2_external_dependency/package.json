@@ -1,7 +1,7 @@
 {
   "name": "step2_external_dependency",
   "version": "0.0.1",
-  "description": "The trivial node.js + C++ example.",
+  "description": "The node.js + C++ example that links against an external library.",
   "main": "run.js",
   "private": true,
   "gypfile": true,
