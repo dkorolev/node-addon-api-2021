@@ -46,3 +46,19 @@ The string that is output is coming from a C++ code, but its very contents is po
 4. Run `(cd extension && make)`, which would rebuild the `.so` that is picked up by `npm i`.
 5. At this point, before `npm i`, `./run.js` would still print the old message.
 6. Confirm that now, after `npm i`, `./run.js` prints the updated message, QED.
+
+### Step 3: Asynchronously Calling JavaScript Functions from C++
+
+This step confirms that an external `.a` library can invoke JavaScript callbacks. TL;DR:
+
+```
+([ -d ../current ] || (cd ..; git clone https://github.com/c5t/current)) && (cd step3_full_integration && (cd extension && make) && make)
+```
+
+The above command, after the build, would start two "workers", both in C++.
+
+One is the timer thread, and it would run for five seconds, printing integers to the console via a JavaScript callback function every 500ms.
+
+The other one is an HTTP server, on `localhost:3000` by default, and it needs a `DELETE` request to shut itself down. All HTTP requests, including the very DELETE one(s), are logged to the console, via another JavaScript callback.
+
+To stop the second "worker" then, from a separate terminal, issue `curl -X DELETE localhost:3000`. The very test script terminates once both threads are done; in other words, this example script runs until the HTTP server is DELETE-d, but for no less than five seconds in total.
