@@ -8,7 +8,7 @@
 #include <string>
 
 struct ExternalServiceSuper {
-  ~ExternalServiceSuper() = default;
+  virtual ~ExternalServiceSuper() = default;
   virtual void WaitUntilDeleted() const = 0;
 };
 
