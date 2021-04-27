@@ -1,10 +1,11 @@
 #include "extension/extension_using_current.h"
 #include "wrapper.h"
 
-namespace see::plus::plus::seventeen
-{
-  inline constexpr std::string_view has{"arrived"};
-}
+#if 0  // NOTE(dkorolev): Working on finding the way to make `node-gyp` C++17-friendly on macOS, unsuccessful so far.
+// clang-format off
+namespace see::plus::plus::seventeen { inline constexpr std::string_view has{"arrived"}; }
+// clang-format on
+#endif
 
 Napi::Value DemoAsyncIntegration(const Napi::CallbackInfo& cbinfo) {
   NodeJSContext ctx(cbinfo);

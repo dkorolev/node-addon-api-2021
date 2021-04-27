@@ -4,8 +4,8 @@
       "target_name": "native",
       "cflags!": [ "-fno-exceptions" ],
       "cflags_cc!": [ "-fno-exceptions" ],
-      "cflags_cc": [ "-std=c++17" ],
-      "xcode_settings": {
+      "REMOVED_cflags_cc": [ "-std=c++17" ],
+      "REMOVED_xcode_settings": {
         "OTHER_CFLAGS": [ "-std=c++17" ]
       },
       "sources": [ "native.cc" ],
